@@ -1,0 +1,27 @@
+describe('Testing rahulshettyacademy ', () => {
+    it('', () => {
+        cy.visit('https://rahulshettyacademy.com/seleniumPractise/#/')
+        cy.get('.search-form').type('Brocolli')
+        cy.get('.products .product-image').should('exist').and('have.length', 1)
+        cy.get('a.increment').click()
+        cy.get('a.increment').click()
+        cy.get('input.quantity').should('have.value', '3')
+        cy.get('.products .product-action').click()
+        cy.get('.products .product-action').should('have.text', '✔ ADDED')
+        cy.get('a.cart-icon').click()
+        cy.get('div.cart-preview.active > div:nth-child(1) > div:nth-child(1) > ul > li').should('be.visible')
+        cy.get('.cart-preview.active > .action-block > button').click()
+        cy.get('p.product-name').should('have.text', 'Brocolli - 1 Kg')
+        cy.get('.promoCode').type('test')
+        cy.get('.promoBtn').click()
+        cy.get('.promoInfo', { timeout: 10000 }).should('have.text', 'Invalid code ..!')
+        cy.get('.products > div > button').click()
+        cy.get('.wrapperTwo select').select('Armenia')
+        cy.get('.chkAgree').check({force:true})
+        cy.get('.wrapperTwo button').click()
+        cy.wait(10000)
+        cy.get('.container').should('contain', 'Thank you')
+
+
+    })
+})
